@@ -2,10 +2,16 @@ const express = require('express');
 const routes = express.Router();
 
 const UserController = require('./controllers/UserController');
+const ProjectController = require('./controllers/ProjectController');
 
-routes.get('/users', UserController.index);
-routes.post('/users', UserController.store);
-routes.put('/users/:id', UserController.update);
-routes.delete('/users/:id', UserController.delete);
+routes
+  // Users
+  .get('/users', UserController.index)
+  .post('/users', UserController.store)
+  .put('/users/:id', UserController.update)
+  .delete('/users/:id', UserController.delete)
+  // Projects
+  .get('/projects', ProjectController.index)
+  .post('/projects', ProjectController.store);
 
 module.exports = routes;

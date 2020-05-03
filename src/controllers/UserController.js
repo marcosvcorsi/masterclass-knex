@@ -2,7 +2,7 @@ const knex = require('../database');
 
 module.exports = {
   async index(request, response) {
-    const users = await knex('users');
+    const users = await knex('users').where('deleted_at', null);
 
     return response.json(users);
   },
@@ -29,7 +29,7 @@ module.exports = {
   async delete(request, response) {
     const { id } = request.params;
 
-    await knex('users').delete().where({
+    await knex('users').update('deleted_at', new Date()).where({
       id,
     });
 

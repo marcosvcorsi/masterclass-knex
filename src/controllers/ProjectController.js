@@ -11,6 +11,7 @@ module.exports = {
       .offset((page - 1) * limit)
       .where(where)
       .join('users', 'users.id', '=', 'projects.user_id')
+      .where('users.deleted_at', null)
       .select('projects.*', 'users.username');
 
     const [count] = await knex('projects').count().where(where);
